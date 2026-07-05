@@ -4,7 +4,13 @@ import { env } from './config/env.js';
 import chatRouter from './routes/chat.routes.js';
 
 const PORT = Number(env.PORT ?? 3000)
-const FRONTEND_URL = env.FRONTEND_URL ?? 'http://localhost:5173'
+
+// Strip trailing slashes — browsers send Origin without one, so a mismatch causes CORS failures.
+// Also supports multiple comma-separated origins: "https://a.com,https://b.com"
+const rawOrigins = (env.FRONTEND_URL ?? 'http://localhost:5173')
+    .split(',')
+    .map((o) => o.trim().replace(/\/$/, ''));
+const FRONTEND_URL = rawOrigins.length === 1 ? rawOrigins[0] : rawOrigins;
 
 const app = express();
 
