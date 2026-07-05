@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Tailwind v4: use class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Space Grotesk', sans-serif;
+}
+
+:root {
+  --background: oklch(94.8% 0.028 342.258);
+  --foreground: var(--color-neutral-950);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.dark {
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+}

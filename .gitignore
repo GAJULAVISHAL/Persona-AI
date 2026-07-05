@@ -1,0 +1,61 @@
+# ============================================================
+# .gitignore — Persona AI (Monorepo Root)
+# Covers: FRONTEND (Vite + React + TS) & backend (Node + TS)
+# ============================================================
+
+# ── Dependencies ─────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Environment & Secrets ────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# ── TypeScript Build Output ──────────────────────────────────
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ── Vite / Frontend ──────────────────────────────────────────
+.vite/
+.cache/
+.parcel-cache/
+
+# ── Logs ─────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Testing & Coverage ───────────────────────────────────────
+coverage/
+.nyc_output/
+*.lcov
+
+# ── OS: Windows ──────────────────────────────────────────────
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── OS: macOS ────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+._*
+
+# ── Editors ──────────────────────────────────────────────────
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# ── Misc ─────────────────────────────────────────────────────
+.turbo/
+.vercel/
+.netlify/
