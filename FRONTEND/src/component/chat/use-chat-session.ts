@@ -1,12 +1,20 @@
 import axios from 'axios'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { createId, createInitialConversations, personaOptions } from './chat-data'
 import type { ChatMessage, PersonaKey, PersonaOption } from './chat-types'
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
 
+const validPersonaKeys = personaOptions.map((p) => p.key) as PersonaKey[]
+
 export function useChatSession() {
-  const [activePersona, setActivePersona] = useState<PersonaKey>('hitesh')
+  const [searchParams] = useSearchParams()
+  const personaFromUrl = searchParams.get('persona') as PersonaKey | null
+  const initialPersona: PersonaKey =
+    personaFromUrl && validPersonaKeys.includes(personaFromUrl) ? personaFromUrl : 'hitesh'
+
+  const [activePersona, setActivePersona] = useState<PersonaKey>(initialPersona)
   const [conversations, setConversations] = useState<Record<PersonaKey, ChatMessage[]>>(
     createInitialConversations,
   )

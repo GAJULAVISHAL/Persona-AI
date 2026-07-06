@@ -1,9 +1,11 @@
 import { MessageCircle } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import hitesh from "../assets/hitesh.png"
 import piyush from "../assets/piyush.png"
 const personas = [
   {
     name: 'Hitesh Choudhary',
+    personaKey: 'hitesh',
     role: 'Tech Educator & YouTuber',
     description: 'Known for making complex coding concepts simple. Speaks with warmth, chai references, and real-world dev experience. His style makes you feel like you\'re learning from a friend.',
     image: hitesh,
@@ -12,6 +14,7 @@ const personas = [
   },
   {
     name: 'Piyush Garg',
+    personaKey: 'piyush',
     role: 'Tech Educator & Builder',
     description: 'Breaks down system design and backend concepts with clarity. Talks like a friend who happens to be a brilliant engineer, always ready to dive deep into the why behind things.',
     image: piyush,
@@ -20,7 +23,8 @@ const personas = [
   },
 ]
 
-function PersonaRow({ name, role, description, image, gradient, tags, index }: typeof personas[0] & { index: number }) {
+function PersonaRow({ name, personaKey, role, description, image, gradient, tags, index }: typeof personas[0] & { index: number }) {
+  const navigate = useNavigate()
   const isEven = index % 2 === 0
 
   return (
@@ -46,7 +50,10 @@ function PersonaRow({ name, role, description, image, gradient, tags, index }: t
         </div>
 
         {/* Chat button */}
-        <button className={`self-start mt-1 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-linear-to-r ${gradient} opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] cursor-pointer shadow-lg shadow-amber-500/10`}>
+        <button
+          onClick={() => navigate(`/chat?persona=${personaKey}`)}
+          className={`self-start mt-1 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-linear-to-r ${gradient} opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] cursor-pointer shadow-lg shadow-amber-500/10`}
+        >
           <MessageCircle className="size-3.5" />
           Chat with {name.split(' ')[0]}
         </button>
